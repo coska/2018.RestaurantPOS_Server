@@ -16,66 +16,17 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "serv_table")
-public class ServTables {
+@Table(name = "employee")
+public class Employee {
 	@Id
 	@GeneratedValue
-	private Long  tableId;
-
-	@NotBlank
-	private String tableName;
+	private String userId;
 	
 	@NotBlank
-	private boolean isTakeOut;
+	private String userName;
 	
-	private Integer seats;
-	
-	private Boolean occupied;
-	
-	public Long getTableId() {
-		return tableId;
-	}
-
-	public void setTableId(Long tableId) {
-		this.tableId = tableId;
-	}
-
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
-	public boolean isTakeOut() {
-		return isTakeOut;
-	}
-
-	public void setTakeOut(boolean isTakeOut) {
-		this.isTakeOut = isTakeOut;
-	}
-
-	public Integer getSeats() {
-		return seats;
-	}
-
-	public void setSeats(Integer seats) {
-		this.seats = seats;
-	}
-
-	public Boolean getOccupied() {
-		return occupied;
-	}
-
-	public void setOccupied(Boolean occupied) {
-		this.occupied = occupied;
-	}
-
 	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
@@ -86,4 +37,19 @@ public class ServTables {
 	@LastModifiedDate
 	private Date updatedAt;
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 }
