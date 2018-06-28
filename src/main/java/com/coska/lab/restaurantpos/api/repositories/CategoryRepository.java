@@ -8,6 +8,6 @@ import com.coska.lab.restaurantpos.api.domain.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-	Category findByCategoryName(String userName);
+	Category findByName(String Name);
 	Category findByCategoryId(Long id);
 }
