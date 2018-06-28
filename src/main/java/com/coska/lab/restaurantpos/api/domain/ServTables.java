@@ -5,12 +5,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -23,17 +23,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Table(name = "serv_table")
 public class ServTables {
 	@Id
-	@GeneratedValue
 	private Long  tableId;
 
 	@NotBlank
 	private String tableName;
 	
-	@NotBlank
-	private boolean isTakeOut;
-	
+	@NotNull
+	private Boolean isTakeOut;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer seats;
 	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Boolean occupied;
 	
 	public Long getTableId() {
@@ -52,13 +53,14 @@ public class ServTables {
 		this.tableName = tableName;
 	}
 
-	public boolean isTakeOut() {
+	public Boolean getIsTakeOut() {
 		return isTakeOut;
 	}
 
-	public void setTakeOut(boolean isTakeOut) {
+	public void setIsTakeOut(Boolean isTakeOut) {
 		this.isTakeOut = isTakeOut;
 	}
+	
 
 	public Integer getSeats() {
 		return seats;

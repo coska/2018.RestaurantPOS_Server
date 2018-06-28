@@ -1,8 +1,9 @@
 package com.coska.lab.restaurantpos.api.controller;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.coska.lab.restaurantpos.api.domain.ServTables;
 import com.coska.lab.restaurantpos.api.exception.ResourceNotFoundException;
@@ -35,8 +35,7 @@ public class TableController {
 	public ServTables getTableByName(@PathVariable String tableName) {
 		ServTables servTable = null;
 		servTable =	tableRepository.findByTableName(tableName);
-		if(/*!servTable.isPresent()*/ servTable == null){
-			//String resourceName, String fieldName, Object fieldValue
+		if(servTable == null){
 			throw new ResourceNotFoundException("Table", "Table Name", tableName);
 		}
 		return servTable;
@@ -44,13 +43,14 @@ public class TableController {
 	
 	
 	@PostMapping("/tables")
-	public ResponseEntity<Object> createTable(@RequestBody ServTables table) {
+	public ServTables createTable(@Valid @RequestBody ServTables table) {
 		ServTables savedtable = tableRepository.save(table);
 
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+		/*URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedtable.getTableId()).toUri();
 
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).build();*/
+		return savedtable;
 
 	}
 	@PutMapping("/tables/{tableId}")
