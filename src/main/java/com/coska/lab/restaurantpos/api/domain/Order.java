@@ -3,48 +3,41 @@ package com.coska.lab.restaurantpos.api.domain;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.coska.lab.restaurantpos.api.model.OrderTypes;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "orders")
 public class Order {
 	@Id
-	@GeneratedValue//(generator = "uuid")
 	private String orderId;	
 	
-	@NotBlank
-	private Boolean status;
+	@Enumerated(EnumType.STRING)
+	private OrderTypes status;
 	
-	//userId column will be created 
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "userId")
-	@JsonManagedReference
-	private Employee orderBy;
+	private Employee orderedBy;
 	
-	@Column(nullable = false, updatable = false)
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@CreatedDate
 	private Date createdAt;
 	
 	@Column(nullable = false)
@@ -54,20 +47,17 @@ public class Order {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "tableId")
-	@JsonManagedReference
 	private ServTables table;
 	
-	//@OneToMany(fetch=FetchType.EAGER)
-	//@JoinColumn(name = "orderId")
-	@OneToMany(mappedBy="order")
-	private List<OrderItem> orderItem;
+	@OneToMany(mappedBy="order",fetch = FetchType.EAGER)
+	private List<OrderItem> orderItems;
 
-	public List<OrderItem> getOrderItem() {
-		return orderItem;
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
-	public void setOrderItem(List<OrderItem> orderItem) {
-		this.orderItem = orderItem;
+	public void setOrderItem(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
 	}
 
 	public String getOrderId() {
@@ -78,20 +68,20 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public String getStatus() {
+		return status.name().toLowerCase();
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(OrderTypes status) {
 		this.status = status;
 	}
 
-	public Employee getOrderBy() {
-		return orderBy;
+	public Employee getOrderedBy() {
+		return orderedBy;
 	}
 
-	public void setOrderBy(Employee orderBy) {
-		this.orderBy = orderBy;
+	public void setOrderedBy(Employee orderBy) {
+		this.orderedBy = orderBy;
 	}
 
 	public Date getCreatedAt() {

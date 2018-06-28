@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.coska.lab.restaurantpos.api.domain.OrderItem;
 
 @Repository
-public interface OrderItemRepository extends JpaRepository<OrderItem, String> {
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 
 }
