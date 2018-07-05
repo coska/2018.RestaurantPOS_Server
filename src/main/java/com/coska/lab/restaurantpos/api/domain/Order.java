@@ -33,7 +33,7 @@ public class Order {
 	@GeneratedValue//(generator = "uuid")
 	private String orderId;	
 	
-	@NotBlank
+	// @NotBlank  => NotBlank annotation is for string attribute and not for int/bool. 
 	private Boolean status;
 	
 	//userId column will be created 
