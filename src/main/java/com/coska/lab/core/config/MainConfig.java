@@ -21,7 +21,7 @@ import org.springframework.core.env.Environment;
 // http://websystique.com/spring/spring-propertysource-value-annotations-example/
 @PropertySources({
 	@PropertySource(value="classpath:application.properties", ignoreResourceNotFound=false),
-	@PropertySource(value="classpath:spring.jpa.properties", ignoreResourceNotFound=false),	
+//	@PropertySource(value="classpath:spring.jpa.properties", ignoreResourceNotFound=false),	
 	@PropertySource(value="classpath:local.properties", ignoreResourceNotFound=true)
 })
 
