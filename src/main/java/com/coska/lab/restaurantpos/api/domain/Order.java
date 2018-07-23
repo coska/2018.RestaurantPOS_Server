@@ -9,6 +9,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,16 +18,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.coska.lab.restaurantpos.api.model.OrderTypes;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "orders")
 public class Order {
 	@Id
+	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid2")
+	@Column(name = "orderid", unique = true)
 	private String orderId;	
 	
 	@Enumerated(EnumType.STRING)
@@ -36,20 +42,21 @@ public class Order {
     @JoinColumn(name = "userId")
 	private Employee orderedBy;
 	
-
+	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date createdAt;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	private Date createdDateTime;
 	
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER/*,cascade={CascadeType.ALL}*/)
     @JoinColumn(name = "tableId")
 	private ServTables table;
 	
-	@OneToMany(mappedBy="order",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="order",fetch = FetchType.EAGER/*,cascade={CascadeType.ALL}*/)
 	private List<OrderItem> orderItems;
 
 	public List<OrderItem> getOrderItems() {
@@ -83,13 +90,13 @@ public class Order {
 	public void setOrderedBy(Employee orderBy) {
 		this.orderedBy = orderBy;
 	}
-
-	public Date getCreatedAt() {
-		return createdAt;
+	
+	public Date getCreatedDateTime() {
+		return createdDateTime;
 	}
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedDateTime(Date createdAt) {
+		this.createdDateTime = createdAt;
 	}
 
 	public ServTables getTable() {

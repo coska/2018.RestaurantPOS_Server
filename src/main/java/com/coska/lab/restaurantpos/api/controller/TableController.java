@@ -34,7 +34,7 @@ public class TableController {
 	@GetMapping("/tables/{tableName}")
 	public ServTables getTableByName(@PathVariable String tableName) {
 		ServTables servTable = null;
-		servTable =	tableRepository.findByTableName(tableName);
+		servTable =	tableRepository.findByName(tableName);
 		if(servTable == null){
 			throw new ResourceNotFoundException("Table", "Table Name", tableName);
 		}

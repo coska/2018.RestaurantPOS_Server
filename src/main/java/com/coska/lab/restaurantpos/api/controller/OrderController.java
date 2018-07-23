@@ -2,7 +2,6 @@ package com.coska.lab.restaurantpos.api.controller;
 
 
 import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.coska.lab.restaurantpos.api.domain.Order;
 import com.coska.lab.restaurantpos.api.domain.OrderItem;
+import com.coska.lab.restaurantpos.api.domain.ServTables;
 import com.coska.lab.restaurantpos.api.repositories.OrderItemRepository;
 import com.coska.lab.restaurantpos.api.repositories.OrderRepository;
+import com.coska.lab.restaurantpos.api.repositories.TableRepository;
 
 @RestController
 public class OrderController {
@@ -25,6 +26,9 @@ public class OrderController {
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
+	@Autowired
+	private TableRepository tableRepository;
 	
 	@GetMapping("/orders")
 	public List<Order> getAllOrders(){
@@ -41,21 +45,48 @@ public class OrderController {
 	}
 	
 	@PostMapping(value="/orders")
-	public Order createOrder(@Valid @RequestBody Order order) {
+	public String createOrder(@Valid @RequestBody Order order) {
 		List<OrderItem> orderItems = order.getOrderItems();
-		orderRepository.save(order);
+		StringBuilder warning = new StringBuilder();
+		
 		if(orderItems == null || orderItems.size()==0)
-			throw new RuntimeException("No Order items");
-		/*
-		 * require more validation check
-		 * ex) is product exist?
-		 */
-		for(int i= 0; i < orderItems.size(); i++) {
-			OrderItem orderItem =orderItems.get(i);
-			orderItem.setOrder(order);
-			orderItemRepository.save(orderItem);
+			return "Order Item is Empty";
+			//throw new RuntimeException("No Order items");
+		
+		ServTables tmpTable = order.getTable();
+		if(tmpTable == null || tmpTable.getTableId() == null)
+			return "Table not exist";
+		
+		ServTables table = tableRepository.findByTableId(tmpTable.getTableId());
+		
+		// check take out table
+		if(table.getIsTakeOut().equals(Boolean.FALSE)) {
+			
+			if(table.getOccupied().equals(Boolean.TRUE))
+				return order.getTable().getName() + " table already ocuupied";
+			
+			//not sure how to handle when bad data is coming
+			if(order.getTable().getOccupied().equals(Boolean.FALSE))
+				return "bad data?";
+			
+			table.setOccupied(order.getTable().getOccupied());
+			tableRepository.save(table);
 		}
 		
-		return order;
+		orderRepository.save(order);
+		for(int i= 0; i < orderItems.size(); i++) {
+			OrderItem orderItem =orderItems.get(i);
+			//if(orderItem.getProduct() == null)
+				
+			if(orderItem.getQuantity() == null || orderItem.getQuantity() <= Integer.valueOf(0)) {
+				warning.append("order item quantity error ");
+				warning.append(orderItem.getProduct().getName() + " product fail to add");
+			}else {
+				orderItem.setOrder(order);
+				orderItemRepository.save(orderItem);
+			}
+		}
+		
+		return order.getOrderId();// + " warning: " +warning.toString();
 	}
 }

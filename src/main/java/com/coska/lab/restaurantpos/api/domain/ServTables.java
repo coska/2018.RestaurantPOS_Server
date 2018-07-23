@@ -26,7 +26,7 @@ public class ServTables {
 	private Long  tableId;
 
 	@NotBlank
-	private String tableName;
+	private String name;
 	
 	@NotNull
 	private Boolean isTakeOut;
@@ -45,12 +45,12 @@ public class ServTables {
 		this.tableId = tableId;
 	}
 
-	public String getTableName() {
-		return tableName;
+	public String getName() {
+		return name;
 	}
 
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
+	public void setName(String tableName) {
+		this.name = tableName;
 	}
 
 	public Boolean getIsTakeOut() {

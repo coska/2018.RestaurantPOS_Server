@@ -1,12 +1,12 @@
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(1, '#1',4,False,False,  CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(2, '#2',4,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(3, '#3',6,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(4, '#4',6,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(5, '#5',6,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(6, '#6',6,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(7, '#7',2,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(8, '#8',2,False,False, CURTIME(), CURTIME());
-INSERT INTO serv_table (tableId, tableName,isTakeOut, createdAt, updatedAt) VALUES(100, 'TakeOut',True, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(1, '#1',4,False,False,  CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(2, '#2',4,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(3, '#3',6,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(4, '#4',6,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(5, '#5',6,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(6, '#6',6,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(7, '#7',2,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,seats,isTakeOut,occupied, createdAt, updatedAt) VALUES(8, '#8',2,False,False, CURTIME(), CURTIME());
+INSERT INTO serv_table (tableId, name,isTakeOut, createdAt, updatedAt) VALUES(100, 'TakeOut',True, CURTIME(), CURTIME());
 
 
 INSERT INTO employee (userId, userName, createdAt, updatedAt) VALUES('dina', 'Dina', CURTIME(), CURTIME());
@@ -101,4 +101,5 @@ INSERT INTO product (productId, name, price, imageFile, categoryId, createdAt, u
 	VALUES ('appetizer11', 'Takoyaki', 8.00, 'https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos/200x200/Appetizer-item+images.011.png' , 3, CURTIME(), CURTIME());
 INSERT INTO product (productId, name, price, imageFile, categoryId, createdAt, updatedAt) 
 	VALUES ('appetizer12', 'Grilled Oysters with Ponzu Sauce', 10.00, 'https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos/200x200/Appetizer-item+images.012.png' , 3, CURTIME(), CURTIME());
+
 	

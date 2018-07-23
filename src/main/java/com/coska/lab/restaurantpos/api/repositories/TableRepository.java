@@ -14,5 +14,6 @@ import com.coska.lab.restaurantpos.api.domain.ServTables;
 
 @Repository
 public interface TableRepository extends JpaRepository<ServTables, Long> {
-	ServTables findByTableName(String tableName);
+	ServTables findByName(String tableName);
+	ServTables findByTableId(Long tableId);
 }
