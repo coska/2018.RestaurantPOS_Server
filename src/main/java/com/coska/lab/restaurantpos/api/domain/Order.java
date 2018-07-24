@@ -34,7 +34,7 @@ public class Order {
 	@GenericGenerator(name="system-uuid", strategy = "uuid2")
 	@Column(name = "orderid", unique = true)
 	private String orderId;	
-	
+
 	@Enumerated(EnumType.STRING)
 	private OrderTypes status;
 	
