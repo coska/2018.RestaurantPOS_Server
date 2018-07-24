@@ -1,18 +1,13 @@
 package com.coska.lab.restaurantpos.api.controller;
 
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coska.lab.restaurantpos.api.domain.Order;
 import com.coska.lab.restaurantpos.api.model.Greeting;
-import com.coska.lab.restaurantpos.api.repositories.OrderRepository;
 
 @RestController
 public class GreetingController {
