@@ -93,28 +93,28 @@ public class OrderController {
 		return order.getOrderId();// + " warning: " +warning.toString();
 	}
 	
-	/**
-	 * Description : Change the status of order.
-	 * @param id : Order ID
-	 * @param status
-	 * 			true : Finished.
-	 * 			false : Cooking.
-	 * @return Changed order
-	 */
-	@PutMapping("/order/{id}/{status}")
-	public Order updateOrderStatus(@PathVariable String id, @PathVariable boolean status){
-		Order order = orderRepository.findByOrderId(id);
-		order.setStatus(status);
-		orderRepository.save(order);
-		return order;
-	}
-
-	/**
-	 * Description : Update information of Order
-	 * @param order
-	 */
-	@PutMapping("/order/update/")
-	public void updateOrder(Order order){
-		orderRepository.save(order);
-	}
+//	/**
+//	 * Description : Change the status of order.
+//	 * @param id : Order ID
+//	 * @param status
+//	 * 			true : Finished.
+//	 * 			false : Cooking.
+//	 * @return Changed order
+//	 */
+//	@PutMapping("/order/{id}/{status}")
+//	public Order updateOrderStatus(@PathVariable String id, @PathVariable boolean status){
+//		Order order = orderRepository.findByOrderId(id);
+//		order.setStatus(status);
+//		orderRepository.save(order);
+//		return order;
+//	}
+//
+//	/**
+//	 * Description : Update information of Order
+//	 * @param order
+//	 */
+//	@PutMapping("/order/update/")
+//	public void updateOrder(Order order){
+//		orderRepository.save(order);
+//	}
 }
