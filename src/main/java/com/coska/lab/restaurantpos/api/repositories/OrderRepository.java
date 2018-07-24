@@ -10,5 +10,5 @@ import com.coska.lab.restaurantpos.api.domain.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, String>{
 	Order findByOrderId(String OrderId);
-	List<Order> findByStatus(boolean status);
+	List<Order> findByStatus(String status);
 }

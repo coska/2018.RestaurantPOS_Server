@@ -1,17 +1,11 @@
 package com.coska.lab.restaurantpos.api.domain;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,7 +15,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -29,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Category {
 	
 	@Id
-	@GeneratedValue
 	private Long categoryId;
 	
 	@Column(nullable = false, updatable = false)
@@ -43,10 +37,11 @@ public class Category {
 	private Date updatedAt;
 	
 	@NotBlank
-	private String categoryName;
+	private String name;	
 	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Boolean needToCook;
-
+	
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -55,12 +50,12 @@ public class Category {
 		this.categoryId = categoryId;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public String getName() {
+		return name;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Boolean getNeedToCook() {
@@ -70,7 +65,6 @@ public class Category {
 	public void setNeedToCook(Boolean needToCook) {
 		this.needToCook = needToCook;
 	}
-	
-	
+
 	
 }
