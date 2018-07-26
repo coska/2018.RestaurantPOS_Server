@@ -37,6 +37,10 @@
 		<div class="starter-template">
 			<h1>Spring Boot Web JSP Example</h1>
 			<h2>Message: ${message}</h2>
+			<h2>API</h2>
+			<ul>
+				<li> <a href="/employee" >/employee</a>
+			</ul>
 		</div>
 
 	</div>
