@@ -34,6 +34,8 @@ public class Employee {
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
+	
+	private String expoPushToken;
 
 	public String getUserId() {
 		return userId;
@@ -50,4 +52,15 @@ public class Employee {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public String getExpoPushToken() {
+		return expoPushToken;
+	}
+
+	public void setExpoPushToken(String expoPushToken) {
+		this.expoPushToken = expoPushToken;
+	}
+	
+	
+	
 }
