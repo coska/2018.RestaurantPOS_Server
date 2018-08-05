@@ -2,16 +2,14 @@ package com.coska.lab.restaurantpos.api.controller;
 
 
 import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coska.lab.restaurantpos.api.domain.Order;
@@ -65,8 +63,8 @@ public class OrderController {
 		// check take out table
 		if(table.getIsTakeOut().equals(Boolean.FALSE)) {
 			
-			if(table.getOccupied().equals(Boolean.TRUE))
-				return order.getTable().getName() + " table already ocuupied";
+//			if(table.getOccupied().equals(Boolean.TRUE))
+//				return order.getTable().getName() + " table already ocuupied";
 			
 			//not sure how to handle when bad data is coming
 			if(order.getTable().getOccupied().equals(Boolean.FALSE))

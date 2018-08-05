@@ -3,6 +3,7 @@ package com.coska.lab.restaurantpos.api.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -14,11 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,33 +34,34 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "orders")
 public class Order {
 	@Id
-	@GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid2")
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid2")
 	@Column(name = "orderid", unique = true)
-	private String orderId;	
+	private String orderId;
 
 	@Enumerated(EnumType.STRING)
 	private OrderTypes status;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "userId")
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "userId")
 	private Employee orderedBy;
-	
-	@Column(nullable = false)
+
+	@Basic(optional = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-	private Date createdDateTime;
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	@CreatedDate
+	private Date createdAt;
+
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@LastModifiedDate
 	private Date updatedAt;
-	
-	@ManyToOne(fetch=FetchType.EAGER/*,cascade={CascadeType.ALL}*/)
-    @JoinColumn(name = "tableId")
+
+	@ManyToOne(fetch = FetchType.EAGER/* ,cascade={CascadeType.ALL} */)
+	@JoinColumn(name = "tableId")
 	private ServTables table;
-	
-	@OneToMany(mappedBy="order",fetch = FetchType.EAGER/*,cascade={CascadeType.ALL}*/)
+
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER/* ,cascade={CascadeType.ALL} */)
 	private List<OrderItem> orderItems;
 
 	public List<OrderItem> getOrderItems() {
@@ -90,13 +95,13 @@ public class Order {
 	public void setOrderedBy(Employee orderBy) {
 		this.orderedBy = orderBy;
 	}
-	
+
 	public Date getCreatedDateTime() {
-		return createdDateTime;
+		return createdAt;
 	}
 
 	public void setCreatedDateTime(Date createdAt) {
-		this.createdDateTime = createdAt;
+		this.createdAt = createdAt;
 	}
 
 	public ServTables getTable() {
@@ -106,6 +111,14 @@ public class Order {
 	public void setTable(ServTables table) {
 		this.table = table;
 	}
-	
-	
+
+//	@PrePersist
+//	protected void onCreate() {
+//		createdAt = new Date();
+//	}
+//
+//	@PreUpdate
+//	void updatedAt() {
+//		this.updatedAt = new Date();
+//	}
 }
