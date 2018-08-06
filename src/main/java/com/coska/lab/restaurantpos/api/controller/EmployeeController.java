@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,5 +41,16 @@ public class EmployeeController {
 		if(em != null)
 			throw new RuntimeException("employee id is already exist");
 	    return employeeRepository.save(employee);
+	}
+	
+	@PutMapping("/employee/{userId}/token/{token}")
+	public Employee updateEmpoloyeeToken(@PathVariable String userId, @PathVariable String token) {
+		Employee em =  employeeRepository.findByUserId(userId);
+		if(em != null) {
+			em.setExpoPushToken(token);
+			employeeRepository.save(em);
+		}
+		
+		return employeeRepository.findByUserId(userId);
 	}
 }
