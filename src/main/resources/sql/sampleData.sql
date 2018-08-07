@@ -107,7 +107,7 @@ INSERT INTO product (productId, name, price, imageFile, categoryId, createdAt, u
 INSERT INTO public.orders (orderid, createdat, status, updatedat, userid, tableid) 
 	VALUES ('91f00584-0c1c-462e-92f4-aaf8c0ea86bb', '2018-08-07 13:32:31.965', 'NEW', '2018-08-07 13:32:31.965', 'dina', 1);
 INSERT INTO public.orders (orderid, createdat, status, updatedat, userid, tableid) 
-	VALUES ('15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', '2018-08-07 13:45:59.612', 'NEW', '2018-08-07 13:45:59.612', 'dina', 1);
+	VALUES ('15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', '2018-08-07 13:45:59.612', 'NEW', '2018-08-07 13:45:59.612', 'dina', 3);
 
 INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid) 
 	VALUES (1, 2, '91f00584-0c1c-462e-92f4-aaf8c0ea86bb', 'main14');
@@ -115,4 +115,6 @@ INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid)
 	VALUES (2, 2, '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', 'main14');
 INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid) 
 	VALUES (3, 2, '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', 'main12');
+INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid) 
+	VALUES (4, 1, '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', 'main1');
 	

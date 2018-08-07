@@ -23,10 +23,14 @@
 	ord.userid,
 	oi.quantity,
 	prd.name productname,
-	prd.price
+	prd.price,
+	tt.name tablename,
+	emp.username
 from orders ord
+join employee emp on ord.userid = emp.userid
 join orderitem oi on ord.orderid = oi.orderid
 join product prd on oi.productid = prd.productid
+join serv_table tt on ord.tableid = tt.tableid
 
 where ord.orderid = '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3']]>
 	</queryString>
@@ -62,6 +66,14 @@ where ord.orderid = '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3']]>
 		<property name="com.jaspersoft.studio.field.label" value="price"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
 	</field>
+	<field name="tablename" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tablename"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="serv_table"/>
+	</field>
+	<field name="username" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="username"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="employee"/>
+	</field>
 	<variable name="price1" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{price}]]></variableExpression>
 	</variable>
@@ -69,19 +81,35 @@ where ord.orderid = '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3']]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="66" splitType="Stretch">
+		<band height="83" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="10" width="120" height="20" uuid="b3eb4c6f-29ce-4eab-8f47-b68c73dd45f7"/>
+				<reportElement x="0" y="0" width="120" height="20" uuid="b3eb4c6f-29ce-4eab-8f47-b68c73dd45f7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Receipt]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="83" y="40" width="100" height="20" uuid="236b37ce-2e42-4291-ba29-f66f64490436"/>
-				<textFieldExpression><![CDATA[$F{userid}]]></textFieldExpression>
+				<reportElement x="85" y="30" width="87" height="20" uuid="236b37ce-2e42-4291-ba29-f66f64490436"/>
+				<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="12" y="40" width="70" height="20" uuid="0ed7c8e3-4c8a-406d-855c-2245a2017e63"/>
+				<reportElement x="15" y="30" width="70" height="20" uuid="0ed7c8e3-4c8a-406d-855c-2245a2017e63"/>
 				<textElement textAlignment="Right"/>
 				<text><![CDATA[Ordered By:]]></text>
+			</staticText>
+			<textField pattern="MMM d, yyyy h:mm:ss a">
+				<reportElement x="172" y="30" width="100" height="20" uuid="96a5bed9-825b-4af4-af70-8a00a3c5c784"/>
+				<textFieldExpression><![CDATA[$F{createdat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="85" y="50" width="87" height="20" uuid="7548bb59-870a-4c17-8a1c-70bcd08436b8"/>
+				<textFieldExpression><![CDATA[$F{tablename}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="50" width="70" height="20" uuid="6ccea909-532f-4286-b11b-d2bff29ad127"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Table:]]></text>
 			</staticText>
 		</band>
 	</title>
