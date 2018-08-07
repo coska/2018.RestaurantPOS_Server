@@ -69,15 +69,24 @@ where ord.orderid = '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3']]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="52" splitType="Stretch">
+		<band height="66" splitType="Stretch">
 			<staticText>
 				<reportElement x="10" y="10" width="120" height="20" uuid="b3eb4c6f-29ce-4eab-8f47-b68c73dd45f7"/>
 				<text><![CDATA[Receipt]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="83" y="40" width="100" height="20" uuid="236b37ce-2e42-4291-ba29-f66f64490436"/>
+				<textFieldExpression><![CDATA[$F{userid}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="40" width="70" height="20" uuid="0ed7c8e3-4c8a-406d-855c-2245a2017e63"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Ordered By:]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="20" splitType="Stretch"/>
+		<band height="12" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="29" splitType="Stretch">
