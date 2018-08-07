@@ -102,4 +102,17 @@ INSERT INTO product (productId, name, price, imageFile, categoryId, createdAt, u
 INSERT INTO product (productId, name, price, imageFile, categoryId, createdAt, updatedAt) 
 	VALUES ('appetizer12', 'Grilled Oysters with Ponzu Sauce', 10.00, 'https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos/200x200/Appetizer-item+images.012.png' , 3, current_date, current_date);
 
+
+
+INSERT INTO public.orders (orderid, createdat, status, updatedat, userid, tableid) 
+	VALUES ('91f00584-0c1c-462e-92f4-aaf8c0ea86bb', '2018-08-07 13:32:31.965', 'NEW', '2018-08-07 13:32:31.965', 'dina', 1);
+INSERT INTO public.orders (orderid, createdat, status, updatedat, userid, tableid) 
+	VALUES ('15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', '2018-08-07 13:45:59.612', 'NEW', '2018-08-07 13:45:59.612', 'dina', 1);
+
+INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid) 
+	VALUES (1, 2, '91f00584-0c1c-462e-92f4-aaf8c0ea86bb', 'main14');
+INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid) 
+	VALUES (2, 2, '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', 'main14');
+INSERT INTO public.orderitem (orderitemid, quantity, orderid, productid) 
+	VALUES (3, 2, '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3', 'main12');
 	
