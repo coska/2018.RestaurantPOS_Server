@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coska.lab.restaurantpos.api.domain.ApiResponse;
 import com.coska.lab.restaurantpos.api.domain.Order;
 import com.coska.lab.restaurantpos.api.domain.OrderItem;
 import com.coska.lab.restaurantpos.api.domain.ServTables;
@@ -46,17 +47,24 @@ public class OrderController {
 	}
 	
 	@PostMapping(value="/orders")
-	public String createOrder(@Valid @RequestBody Order order) {
+	public ApiResponse createOrder(@Valid @RequestBody Order order) {
+
+		ApiResponse resp = new ApiResponse();
+		
 		List<OrderItem> orderItems = order.getOrderItems();
 		StringBuilder warning = new StringBuilder();
 		
 		if(orderItems == null || orderItems.size()==0)
-			return "Order Item is Empty";
+		{
+			resp.addError("OrderError",  "Order Item is Empty");
+		}
 			//throw new RuntimeException("No Order items");
 		
 		ServTables tmpTable = order.getTable();
 		if(tmpTable == null || tmpTable.getTableId() == null)
-			return "Table not exist";
+		{
+			resp.addError("TableError",  "Table not exist");
+		}
 		
 		ServTables table = tableRepository.findByTableId(tmpTable.getTableId());
 		
@@ -68,11 +76,15 @@ public class OrderController {
 			
 			//not sure how to handle when bad data is coming
 			if(order.getTable().getOccupied().equals(Boolean.FALSE))
-				return "bad data?";
+				resp.addError("TableError",  "Table is occupied already.");
 			
 			table.setOccupied(order.getTable().getOccupied());
 			tableRepository.save(table);
 		}
+		
+
+		if (resp.hasError() )
+			return resp;
 		
 		orderRepository.save(order);
 		for(int i= 0; i < orderItems.size(); i++) {
@@ -88,31 +100,8 @@ public class OrderController {
 			}
 		}
 		
-		return order.getOrderId();// + " warning: " +warning.toString();
+		resp.setData("{orderId:\"" + order.getOrderId() + "\"}");
+		return resp;
 	}
 	
-//	/**
-//	 * Description : Change the status of order.
-//	 * @param id : Order ID
-//	 * @param status
-//	 * 			true : Finished.
-//	 * 			false : Cooking.
-//	 * @return Changed order
-//	 */
-//	@PutMapping("/order/{id}/{status}")
-//	public Order updateOrderStatus(@PathVariable String id, @PathVariable boolean status){
-//		Order order = orderRepository.findByOrderId(id);
-//		order.setStatus(status);
-//		orderRepository.save(order);
-//		return order;
-//	}
-//
-//	/**
-//	 * Description : Update information of Order
-//	 * @param order
-//	 */
-//	@PutMapping("/order/update/")
-//	public void updateOrder(Order order){
-//		orderRepository.save(order);
-//	}
 }

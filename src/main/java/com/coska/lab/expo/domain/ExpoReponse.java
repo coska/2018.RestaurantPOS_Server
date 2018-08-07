@@ -1,4 +1,4 @@
-package com.coska.lab.expo.api;
+package com.coska.lab.expo.domain;
 
 import java.util.Map;
 

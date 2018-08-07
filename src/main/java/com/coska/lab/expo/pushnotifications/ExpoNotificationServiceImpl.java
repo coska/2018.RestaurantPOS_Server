@@ -1,32 +1,35 @@
 package com.coska.lab.expo.pushnotifications;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.coska.lab.core.notification.NotificationService;
-import com.coska.lab.expo.api.ExpoAPI;
-import com.coska.lab.restaurantpos.api.domain.Employee;
-import com.coska.lab.restaurantpos.api.repositories.EmployeeRepository;
+import com.coska.lab.expo.domain.ExpoReponse;
+import com.coska.lab.expo.domain.PushMessage;
+import com.coska.lab.restaurantpos.api.domain.ApiResponse;
 
 @Service
 public class ExpoNotificationServiceImpl implements NotificationService {
-	
-	
-	@Autowired
-	private EmployeeRepository employeeRepository;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private String getUrl() {
-		return ExpoAPI.EXPO_HOST + ExpoAPI.BaseAPIURL;
-	}
-	
+	final static String PUSH_SEND_URL = "https://exp.host/--/api/v2/push/send";
+
 	@Override
-	public boolean sendNotice(String userId, String message) {
-		Employee em = employeeRepository.findByUserId(userId);
-		if (em != null) {
-			String token = em.getExpoPushToken();
-			
+	public ApiResponse sendNotice(PushMessage pm) {
+		ApiResponse resp = new ApiResponse();
+		RestTemplate restTemplate = new RestTemplate();
+
+		try {
+			String result = restTemplate.postForObject(PUSH_SEND_URL, pm, String.class);
+			resp.setData(result);
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			resp.addError("API Error", e.getMessage());
 		}
-		return false;
+
+		return resp;
 	}
 
 }

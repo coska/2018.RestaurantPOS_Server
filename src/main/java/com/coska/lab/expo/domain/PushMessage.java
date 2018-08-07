@@ -1,16 +1,30 @@
-package com.coska.lab.expo.api;
+package com.coska.lab.expo.domain;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class PushMessage {
 	
 	private String to;
-	private String body;
-	private String data;
-	private String sound;
 	private String title;
-	private int ttl;
-	private long expiration;
+	private String body;
+	
+	@JsonInclude(Include.NON_NULL)
+	private String data;
+	
+	@JsonInclude(Include.NON_NULL)
+	private String sound;
+	
+	@JsonInclude(Include.NON_NULL)
+	private Integer ttl;
+	
+	@JsonInclude(Include.NON_NULL)
+	private Integer expiration;
+	
 	private String priority="default";
-	private int badge;
+	
+	@JsonInclude(Include.NON_NULL)	
+	private Integer badge;
 
 	public String getTo() {
 		return to;
@@ -18,6 +32,14 @@ public class PushMessage {
 
 	public void setTo(String to) {
 		this.to = to;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getBody() {
@@ -44,27 +66,19 @@ public class PushMessage {
 		this.sound = sound;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public int getTtl() {
+	public Integer getTtl() {
 		return ttl;
 	}
 
-	public void setTtl(int ttl) {
+	public void setTtl(Integer ttl) {
 		this.ttl = ttl;
 	}
 
-	public long getExpiration() {
+	public Integer getExpiration() {
 		return expiration;
 	}
 
-	public void setExpiration(long expiration) {
+	public void setExpiration(Integer expiration) {
 		this.expiration = expiration;
 	}
 
@@ -76,12 +90,13 @@ public class PushMessage {
 		this.priority = priority;
 	}
 
-	public int getBadge() {
+	public Integer getBadge() {
 		return badge;
 	}
 
-	public void setBadge(int badge) {
+	public void setBadge(Integer badge) {
 		this.badge = badge;
 	}
+	
 
 }

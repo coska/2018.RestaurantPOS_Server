@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -111,14 +109,4 @@ public class Order {
 	public void setTable(ServTables table) {
 		this.table = table;
 	}
-
-//	@PrePersist
-//	protected void onCreate() {
-//		createdAt = new Date();
-//	}
-//
-//	@PreUpdate
-//	void updatedAt() {
-//		this.updatedAt = new Date();
-//	}
 }
