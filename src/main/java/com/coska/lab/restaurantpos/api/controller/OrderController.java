@@ -16,9 +16,11 @@ import com.coska.lab.restaurantpos.api.domain.ApiResponse;
 import com.coska.lab.restaurantpos.api.domain.Order;
 import com.coska.lab.restaurantpos.api.domain.OrderItem;
 import com.coska.lab.restaurantpos.api.domain.ServTables;
+import com.coska.lab.restaurantpos.api.model.OrderTypes;
 import com.coska.lab.restaurantpos.api.repositories.OrderItemRepository;
 import com.coska.lab.restaurantpos.api.repositories.OrderRepository;
 import com.coska.lab.restaurantpos.api.repositories.TableRepository;
+import com.coska.lab.restaurantpos.api.repositories.spec.OrderSpecification;
 
 @RestController
 public class OrderController {
@@ -35,8 +37,9 @@ public class OrderController {
 	@GetMapping("/orders")
 	public List<Order> getAllOrders(){
 		//need to confirm - "paid" status
-		return orderRepository.findAll();
-		//return orderRepository.findByStatus(OrderTypes.SERVED);
+//		return orderRepository.findAll();
+//		return orderRepository.findByStatus(OrderTypes.SERVED);
+		return orderRepository.findAll(OrderSpecification.statusNotServed());
 	}
 	
 	@GetMapping("/orders/{orderId}")
