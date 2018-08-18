@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coska.lab.core.notification.NotificationService;
 import com.coska.lab.expo.domain.PushMessage;
 import com.coska.lab.expo.domain.RegisterTokenReq;
-import com.coska.lab.expo.pushnotifications.ExpoNotificationServiceImpl;
 import com.coska.lab.restaurantpos.api.domain.ApiResponse;
-import com.coska.lab.restaurantpos.api.domain.Employee;
 import com.coska.lab.restaurantpos.api.domain.UserToken;
 import com.coska.lab.restaurantpos.api.repositories.EmployeeRepository;
 import com.coska.lab.restaurantpos.api.repositories.TokenRepository;
@@ -26,7 +25,7 @@ public class MessageController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	@Autowired
-	ExpoNotificationServiceImpl expo;
+	NotificationService expo;
 
 	@PostMapping("/users/push-token")
 	public ApiResponse registerToken(@RequestBody RegisterTokenReq token) {

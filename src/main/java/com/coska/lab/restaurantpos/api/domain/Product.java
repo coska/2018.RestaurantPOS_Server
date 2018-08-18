@@ -72,7 +72,9 @@ public class Product {
 	}
 
 	public String getImageFile() {
-		return imageFile;
+//		final String path1 = "https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos";
+		final String path1 = "/products";
+		return path1+imageFile;
 	}
 
 	public void setImageFile(String imageFile) {

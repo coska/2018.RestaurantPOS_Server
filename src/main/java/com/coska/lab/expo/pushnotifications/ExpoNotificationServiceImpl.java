@@ -6,11 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.coska.lab.core.notification.NotificationService;
-import com.coska.lab.expo.domain.ExpoReponse;
 import com.coska.lab.expo.domain.PushMessage;
 import com.coska.lab.restaurantpos.api.domain.ApiResponse;
 
-@Service
+@Service("NotificationService")
 public class ExpoNotificationServiceImpl implements NotificationService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 

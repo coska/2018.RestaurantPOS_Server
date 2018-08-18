@@ -24,7 +24,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.coska.lab.restaurantpos.api.model.OrderTypes;
+import com.coska.lab.restaurantpos.api.model.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -38,7 +38,7 @@ public class Order {
 	private String orderId;
 
 	@Enumerated(EnumType.STRING)
-	private OrderTypes status;
+	private OrderStatus orderStatus=OrderStatus.NEW;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
@@ -78,12 +78,12 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public String getStatus() {
-		return status.name().toLowerCase();
+	public String getOrderStatus() {
+		return orderStatus.name().toLowerCase();
 	}
 
-	public void setStatus(OrderTypes status) {
-		this.status = status;
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
 	public Employee getOrderedBy() {

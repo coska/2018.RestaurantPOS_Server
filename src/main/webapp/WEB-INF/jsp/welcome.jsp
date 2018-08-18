@@ -42,7 +42,8 @@
 				<li> <a href="/employee" target="_blank">/employee</a> </li>
 				<li> <a href="/categories" target="_blank">/categories</a> </li>
 				<li> <a href="/products" target="_blank">/products</a> </li>
-				<li> <a href="/products" target="_blank">/tables</a> </li>
+				<li> <a href="/tables" target="_blank">/tables</a> </li>
+				<li> <a href="/orders" target="_blank">/orders</a> </li>
 				<li> <a href="/orders/15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3" target="_blank">Order Example</a> </li>
 				<li> <a href="/receipts/15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3" target="_blank">Receipt Example</a> </li>
 				

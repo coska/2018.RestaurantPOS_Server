@@ -8,7 +8,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.coska.lab.restaurantpos.api.domain.Order;
-import com.coska.lab.restaurantpos.api.model.OrderTypes;
+import com.coska.lab.restaurantpos.api.model.OrderStatus;
 
 /**
  * Define detail conditions for getting data from Order table
@@ -20,7 +20,7 @@ public class OrderSpecification {
 		return new Specification<Order>(){
 			@Override
 			public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-				return criteriaBuilder.equal(root.<OrderTypes>get("status"), OrderTypes.SERVED).not();
+				return criteriaBuilder.equal(root.<OrderStatus>get("status"), OrderStatus.SERVED).not();
 			}
 		};
 	}

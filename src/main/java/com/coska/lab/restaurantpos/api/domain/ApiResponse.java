@@ -6,6 +6,7 @@ import java.util.Map;
 public class ApiResponse {
 
 	private String data;
+	private String type;
 	private Map<String, String> errors;
 
 	public String getData() {
@@ -32,4 +33,14 @@ public class ApiResponse {
 	public boolean hasError() {
 		return (errors != null && errors.size() > 0) ? true: false;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
 }
