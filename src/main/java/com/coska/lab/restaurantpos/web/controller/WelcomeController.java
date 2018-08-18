@@ -1,5 +1,6 @@
 package com.coska.lab.restaurantpos.web.controller;
 
+import java.util.Calendar;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,11 @@ public class WelcomeController {
 	public String welcome(Map<String, Object> model) {
 		model.put("message", this.message);
 		return "welcome";
+	}
+	
+	@RequestMapping("/time")
+	public String getCurrentTime() {
+		return Calendar.getInstance().getTime().toGMTString();
 	}
 
 }

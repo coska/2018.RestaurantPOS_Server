@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +48,13 @@ public class OrderController {
 		Order order = null;
 		order = orderRepository.findByOrderId(orderId);
 		return order;
+	}
+	
+	@PutMapping(value="/orders/{orderId}")
+	public ApiResponse complOrder(@PathVariable String orderId) {
+		ApiResponse resp = new ApiResponse();
+		
+		return resp;
 	}
 	
 	@PostMapping(value="/orders")

@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,6 +24,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "product")
 public class Product {
 	
+	final static String BASE_IMAGE_URL = "https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos";
+    
 	@Id
 	private String productId;	
 	
@@ -72,9 +75,7 @@ public class Product {
 	}
 
 	public String getImageFile() {
-//		final String path1 = "https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos";
-		final String path1 = "/products";
-		return path1+imageFile;
+		return BASE_IMAGE_URL+imageFile;
 	}
 
 	public void setImageFile(String imageFile) {
