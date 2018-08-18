@@ -39,6 +39,7 @@
 			<h2>Message: ${message}</h2>
 			<h2>API</h2>
 			<ul>
+				<li> <a href="/time" target="_blank">/time</a> </li>
 				<li> <a href="/employee" target="_blank">/employee</a> </li>
 				<li> <a href="/categories" target="_blank">/categories</a> </li>
 				<li> <a href="/products" target="_blank">/products</a> </li>

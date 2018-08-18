@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class WelcomeController {
@@ -20,7 +22,8 @@ public class WelcomeController {
 		return "welcome";
 	}
 	
-	@RequestMapping("/time")
+	@ResponseBody
+	@GetMapping("/time")
 	public String getCurrentTime() {
 		return Calendar.getInstance().getTime().toGMTString();
 	}

@@ -19,8 +19,8 @@ public class RestaurantPosServerApplication {
 
 		while (true) {
 			try {
-//				Thread.sleep(1000 * 60 * 10);
-				Thread.sleep(1000 * 2);
+				Thread.sleep(1000 * 60);
+//				Thread.sleep(1000 * 30);
 			} catch (InterruptedException e) {
 			}
 
