@@ -4,26 +4,35 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class PushMessage {
-	
+
 	private String to;
+	private MessageType messageType;
 	private String title;
 	private String body;
-	
+
+	public PushMessage() {
+
+	}
+
+	public PushMessage(MessageType messageType) {
+		this.messageType=  messageType;
+	}
+
 	@JsonInclude(Include.NON_NULL)
 	private String data;
-	
+
 	@JsonInclude(Include.NON_NULL)
 	private String sound;
-	
+
 	@JsonInclude(Include.NON_NULL)
 	private Integer ttl;
-	
+
 	@JsonInclude(Include.NON_NULL)
 	private Integer expiration;
-	
-	private String priority="default";
-	
-	@JsonInclude(Include.NON_NULL)	
+
+	private String priority = "default";
+
+	@JsonInclude(Include.NON_NULL)
 	private Integer badge;
 
 	public String getTo() {
@@ -97,6 +106,13 @@ public class PushMessage {
 	public void setBadge(Integer badge) {
 		this.badge = badge;
 	}
-	
+
+	public MessageType getMessageType() {
+		return messageType;
+	}
+
+	public void setMessageType(MessageType messageType) {
+		this.messageType = messageType;
+	}
 
 }

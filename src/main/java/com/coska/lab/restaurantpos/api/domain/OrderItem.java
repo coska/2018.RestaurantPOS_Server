@@ -1,13 +1,13 @@
 package com.coska.lab.restaurantpos.api.domain;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,19 +18,36 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "orderitem")
 public class OrderItem {
+
+	@EmbeddedId
+	private OrderItemId orderItemId;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long orderItemId;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="orderId")
+//	@MapsId("orderId")
+	@JoinColumns({
+		@JoinColumn(name="orderId", insertable=false, updatable=false)
+	})
+	 @ManyToOne(fetch = FetchType.EAGER/* ,cascade={CascadeType.ALL} */)
 	private Order order;
+//	
+//	@Id
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+//	private Long orderItemId;
 	
+//	
+//	
+	
+	public void setOrderItemId(OrderItemId orderItemId) {
+		this.orderItemId = orderItemId;
+	}
 	
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+//
+//	public Order getOrder() {
+//		return this.order;
+//	}
 	
 	private Integer quantity;
 

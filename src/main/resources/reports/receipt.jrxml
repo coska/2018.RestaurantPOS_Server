@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="receipt" pageWidth="283" pageHeight="427" columnWidth="267" leftMargin="8" rightMargin="8" topMargin="8" bottomMargin="8" uuid="106e8959-0d77-4d42-8c16-3c3e002f7f73">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Local_RestaurantPOS"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit." value="mm"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
@@ -15,6 +15,11 @@
 	<style name="item_detail" fontSize="8"/>
 	<style name="item_header" style="item_detail" pattern="" isBold="true"/>
 	<style name="Currency" style="item_detail" hTextAlign="Right" pattern="¤#,##0.00;¤-#,##0.00"/>
+	<parameter name="subtotal" class="java.lang.Double" isForPrompting="false">
+		<defaultValueExpression><![CDATA[135.02]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totHST" class="java.lang.Double" isForPrompting="false"/>
+	<parameter name="totTotal" class="java.lang.Double" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[select ord.orderid, 
 	ord.status,
@@ -180,13 +185,13 @@ where ord.orderid = '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3']]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="34" splitType="Stretch">
-			<textField>
-				<reportElement style="Currency" x="206" y="7" width="60" height="12" uuid="8cccfe14-c5e8-4759-a439-250ea44198c3"/>
+		<band height="62" splitType="Stretch">
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement style="Currency" x="190" y="7" width="76" height="12" uuid="8cccfe14-c5e8-4759-a439-250ea44198c3"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{price1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="item_header" x="50" y="5" width="50" height="14" uuid="0494b13e-5f70-41dd-9062-524ff4ce4372"/>
@@ -196,6 +201,17 @@ where ord.orderid = '15b60f42-2b4a-4a2d-97fc-bfd9f386c1c3']]>
 			<line>
 				<reportElement x="0" y="2" width="270" height="2" uuid="9d7070a9-ea01-4708-9c9e-1e492a7d97c2"/>
 			</line>
+			<textField>
+				<reportElement style="Currency" x="190" y="19" width="76" height="12" uuid="0a191f7b-340d-46a5-9e02-4755a5150828"/>
+				<textFieldExpression><![CDATA[$P{totHST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Currency" x="190" y="31" width="76" height="18" uuid="7753e304-9a63-4388-bdeb-5818315ee67e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totTotal}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>

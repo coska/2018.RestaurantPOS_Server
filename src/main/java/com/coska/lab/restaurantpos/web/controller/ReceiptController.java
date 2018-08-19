@@ -36,23 +36,30 @@ public class ReceiptController {
 
 	    Map<String, Object> params = new HashMap<>();
 	    List<Map<String, Object>> orderItems = new ArrayList<>();
+	    double subTotal = 0;
 	    for(OrderItem item : order.getOrderItems()) {
 	    	Map<String, Object> rec = new HashMap<>();
 	    	rec.put("orderid", order.getOrderId());
 	    	rec.put("createdat", order.getCreatedDateTime());
 	    	rec.put("tableid", order.getTable().getName());
+	    	rec.put("tablename", order.getTable().getName());
 	    	
 	    	rec.put("userid", order.getOrderedBy().getUserName());
+	    	rec.put("username", order.getOrderedBy().getUserName());
 	    	
 	    	rec.put("quantity", item.getQuantity());
 	    	rec.put("productname", item.getProduct().getName());
 	    	rec.put("price", item.getProduct().getPrice());
+	    	subTotal += item.getQuantity()  * item.getProduct().getPrice();
 	    	
 	    	
 	    	
 	    	orderItems.add(rec);
 	    }
 	    params.put("datasource", orderItems);
+	    params.put("subtotal", subTotal );
+	    params.put("totHST", subTotal * 0.13 );
+	    params.put("totTotal", subTotal * 1.13 );
 
 	    return new ModelAndView(view, params);
 	}
