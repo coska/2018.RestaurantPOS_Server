@@ -19,12 +19,12 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.coska.lab.core.config.GlobalValue;
+
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "product")
 public class Product {
-	
-	final static String BASE_IMAGE_URL = "https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos";
     
 	@Id
 	private String productId;	
@@ -75,7 +75,8 @@ public class Product {
 	}
 
 	public String getImageFile() {
-		return BASE_IMAGE_URL+imageFile;
+//		return ApiUtils.getBaseImageUrl()+imageFile;
+		return GlobalValue.DATABASE+imageFile;
 	}
 
 	public void setImageFile(String imageFile) {

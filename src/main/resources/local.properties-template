@@ -1,5 +1,5 @@
 #BASE IMAGE URL
-BASE_IMAGE_URL=https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos
+base.image.url=https://s3.ca-central-1.amazonaws.com/coska-restaurant-pos
 
 # DB Addcount Information
 spring.datasource.username=RestaurantPOS

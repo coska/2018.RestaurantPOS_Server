@@ -1,5 +1,8 @@
 package com.coska.lab.expo.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -9,6 +12,7 @@ public class PushMessage {
 	private MessageType messageType;
 	private String title;
 	private String body;
+	private Map<String, Object> dataMap = null;
 
 	public PushMessage() {
 
@@ -16,6 +20,8 @@ public class PushMessage {
 
 	public PushMessage(MessageType messageType) {
 		this.messageType=  messageType;
+		this.dataMap = new HashMap<>();
+		dataMap.put("ACTION", messageType.getName());
 	}
 
 	@JsonInclude(Include.NON_NULL)
@@ -48,6 +54,7 @@ public class PushMessage {
 	}
 
 	public void setTitle(String title) {
+		dataMap.put("TITLE", title);
 		this.title = title;
 	}
 
@@ -59,12 +66,12 @@ public class PushMessage {
 		this.body = body;
 	}
 
-	public String getData() {
-		return data;
+	public Object getData() {
+		return dataMap;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void addData(String key, Object value) {
+		dataMap.put(key, value);
 	}
 
 	public String getSound() {
