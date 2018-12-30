@@ -17,27 +17,26 @@ public class RestaurantPosServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestaurantPosServerApplication.class, args);
 
-		while (true) {
-			try {
-				Thread.sleep(1000 * 60 * 10 );
-//				Thread.sleep(1000 * 30);
-			} catch (InterruptedException e) {
-			}
-
-			RestTemplate restTemplate = new RestTemplate();
-
-			final String URL = "https://tklab.herokuapp.com/time";
-			try {
-				String result = restTemplate.getForObject(URL,  String.class);
-				if(result != null) {
-					logger.info(result.substring(0,  10));
-				} else {
-					logger.info("No Result");
-				}			
-				
-			} catch (Exception e) {
-				logger.error(e.getMessage());
-			};
-		}
+//		while (true) {
+//			try {
+//				Thread.sleep(1000 * 60 * 10 );
+//			} catch (InterruptedException e) {
+//			}
+//
+//			RestTemplate restTemplate = new RestTemplate();
+//
+//			final String URL = "https://tklab.herokuapp.com/time";
+//			try {
+//				String result = restTemplate.getForObject(URL,  String.class);
+//				if(result != null) {
+//					logger.info(result.substring(0,  10));
+//				} else {
+//					logger.info("No Result");
+//				}			
+//				
+//			} catch (Exception e) {
+//				logger.error(e.getMessage());
+//			};
+//		}
 	}
 }
