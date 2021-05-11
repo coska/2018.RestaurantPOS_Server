@@ -31,12 +31,12 @@ public class TableController {
 		return tableRepository.findAll();
 	}
 	
-	@GetMapping("/tables/{tableName}")
-	public ServTables getTableByName(@PathVariable String tableName) {
+	@GetMapping("/tables/{tableId}")
+	public ServTables getTableByName(@PathVariable Long tableId) {
 		ServTables servTable = null;
-		servTable =	tableRepository.findByName(tableName);
+		servTable =	tableRepository.findByTableId(tableId);
 		if(servTable == null){
-			throw new ResourceNotFoundException("Table", "Table Name", tableName);
+			throw new ResourceNotFoundException("Table", "Table ID", tableId);
 		}
 		return servTable;
 	}
