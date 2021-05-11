@@ -23,19 +23,12 @@ public class OrderItem {
 	private OrderItemId orderItemId;
 	
 	
-//	@MapsId("orderId")
 	@JoinColumns({
 		@JoinColumn(name="orderId", insertable=false, updatable=false)
 	})
 	 @ManyToOne(fetch = FetchType.EAGER/* ,cascade={CascadeType.ALL} */)
 	private Order order;
-//	
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	private Long orderItemId;
-	
-//	
-//	
+
 	
 	public void setOrderItemId(OrderItemId orderItemId) {
 		this.orderItemId = orderItemId;
@@ -44,10 +37,6 @@ public class OrderItem {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-//
-//	public Order getOrder() {
-//		return this.order;
-//	}
 	
 	private Integer quantity;
 

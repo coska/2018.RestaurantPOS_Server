@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Category {
 	
 	@Id
+	@Column(name = "categoryId", unique = true)
 	private Long categoryId;
 	
 	@Column(nullable = false, updatable = false)

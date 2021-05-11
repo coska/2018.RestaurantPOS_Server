@@ -13,6 +13,7 @@ INSERT INTO employee (userId, userName, createdAt, updatedAt) VALUES('dina', 'Di
 INSERT INTO employee (userId, userName, createdAt, updatedAt) VALUES('thomas', 'Thomas', current_date, current_date);
 INSERT INTO employee (userId, userName, createdAt, updatedAt) VALUES('anna', 'Anna', current_date, current_date);
 
+
 INSERT INTO category (categoryId, name, needToCook ,createdAt, updatedAt) VALUES(1, 'beverages', False, current_date, current_date);
 INSERT INTO category (categoryId, name, needToCook ,createdAt, updatedAt) VALUES(2, 'main', True, current_date, current_date);
 INSERT INTO category (categoryId, name, needToCook ,createdAt, updatedAt) VALUES(3, 'appetizers', True, current_date, current_date);
